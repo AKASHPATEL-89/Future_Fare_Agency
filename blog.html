@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - FutureFareAgency</title>
+    <link rel="icon" type="image/x-icon" href="Images\AI.jpg">
+    <meta name="theme-color" content="#16a085">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="blog.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="auth.js"></script>
+    <script>
+        // Check authentication before page loads
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+        
+        // Enhanced logout functionality for blog page
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('users');
+                
+                const logoutMessage = document.createElement('div');
+                logoutMessage.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #e74c3c;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    z-index: 10000;
+                    font-weight: 500;
+                `;
+                logoutMessage.textContent = 'Logging out...';
+                document.body.appendChild(logoutMessage);
+                
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1000);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.getElementById('logoutBtn');
+            const logoutBtns = document.querySelectorAll('.logout-btn, #logoutBtn');
+            
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleLogout();
+                });
+            }
+            
+            logoutBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleLogout();
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (e.target.id === 'logoutBtn' || e.target.classList.contains('logout-btn')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleLogout();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="Images\AI.jpg" alt="FutureFareAgency Logo" class="logo-img">
+                <h2>FutureFareAgency</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" id="logoutBtn" class="logout-btn">Logout</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <section class="blog-header">
+        <div class="container">
+            <h1>FutureFareAgency Blog</h1>
+            <p>Insights, trends, and innovations in artificial intelligence</p>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+            <div class="blog-grid">
+                <!-- Featured Article -->
+                <article class="blog-post featured">
+                    <div class="post-image">
+                        <img src="Images\The Future of Artificial Intelligence in 2024.jpg" alt="AI Future" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="fallback-icon" style="display:none;"><i class="fas fa-brain"></i></div>
+                    </div>
+                    <div class="post-content">
+                        <span class="post-category">AI Trends</span>
+                        <h2>The Future of Artificial Intelligence in 2024</h2>
+                        <p>Explore the latest trends and breakthroughs in AI technology that are shaping the future of business and society.</p>
+                        <div class="post-meta">
+                            <span><i class="fas fa-calendar"></i> December 15, 2024</span>
+                            <span><i class="fas fa-user"></i> Akash Singh</span>
+                        </div>
+                        <a href="https://www.analyticsinsight.net/artificial-intelligence/the-future-of-artificial-intelligence-2024" 
+   class="read-more" 
+   target="_blank">
+   Read More
+</a>
+
+                    </div>
+                </article>
+
+                <!-- Blog Posts Grid -->
+                <div class="posts-grid">
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="Images\NLP.png" alt="Chatbot NLP" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="fallback-icon" style="display:none;"><i class="fas fa-robot"></i></div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Machine Learning</span>
+                            <h3>Building Intelligent Chatbots with NLP</h3>
+                            <p>Learn how to create sophisticated chatbots using natural language processing techniques.</p>
+                            <div class="post-meta">
+                                <span><i class="fas fa-calendar"></i> Dec 12, 2024</span>
+                            </div>
+                            <a href="https://codezup.com/building-chatbots-with-natural-language-processing/" class="read-more" target="_blank">Read More
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="Images/business-analytics.jpg" alt="Business Analytics" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="fallback-icon" style="display:none;"><i class="fas fa-chart-line"></i></div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Data Science</span>
+                            <h3>AI-Powered Business Analytics</h3>
+                            <p>Discover how AI transforms business intelligence and decision-making processes.</p>
+                            <div class="post-meta">
+                                <span><i class="fas fa-calendar"></i> Dec 10, 2024</span>
+                            </div>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="Images/ai-cybersecurity.jpg" alt="AI Cybersecurity" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="fallback-icon" style="display:none;"><i class="fas fa-shield-alt"></i></div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Security</span>
+                            <h3>AI in Cybersecurity: Threats and Solutions</h3>
+                            <p>Understanding how AI is revolutionizing cybersecurity defense mechanisms.</p>
+                            <div class="post-meta">
+                                <span><i class="fas fa-calendar"></i> Dec 8, 2024</span>
+                            </div>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="Images/mobile-ai.jpg" alt="Mobile AI" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="fallback-icon" style="display:none;"><i class="fas fa-mobile-alt"></i></div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Mobile AI</span>
+                            <h3>AI Integration in Mobile Applications</h3>
+                            <p>Best practices for implementing AI features in mobile app development.</p>
+                            <div class="post-meta">
+                                <span><i class="fas fa-calendar"></i> Dec 5, 2024</span>
+                            </div>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="Images/cloud-ai.jpg" alt="Cloud AI" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="fallback-icon" style="display:none;"><i class="fas fa-cloud"></i></div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Cloud AI</span>
+                            <h3>Scaling AI Solutions in the Cloud</h3>
+                            <p>Strategies for deploying and scaling AI applications using cloud infrastructure.</p>
+                            <div class="post-meta">
+                                <span><i class="fas fa-calendar"></i> Dec 3, 2024</span>
+                            </div>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="Images/process-automation.jpg" alt="Process Automation" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="fallback-icon" style="display:none;"><i class="fas fa-cogs"></i></div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Automation</span>
+                            <h3>Process Automation with AI</h3>
+                            <p>How artificial intelligence is transforming business process automation.</p>
+                            <div class="post-meta">
+                                <span><i class="fas fa-calendar"></i> Dec 1, 2024</span>
+                            </div>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer enhanced-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section company-info">
+                    <div class="footer-logo">
+                        <img src="Images\AI.jpg" alt="Global AI Logo" class="footer-logo-img">
+                        <h3>Global AI</h3>
+                    </div>
+                    <p class="footer-tagline">Transforming the future with artificial intelligence</p>
+                    <p class="footer-description">Leading AI company providing cutting-edge solutions for businesses worldwide. We specialize in machine learning, deep learning, and AI-powered automation.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/918953455851?text=Hello%20Global%20AI!%20I'm%20interested%20in%20your%20services." target="_blank" class="social-link whatsapp-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="index.html#products"><i class="fas fa-box"></i> Products</a></li>
+                        <li><a href="index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+                        <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>AI Solutions</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-robot"></i> Machine Learning</a></li>
+                        <li><a href="#"><i class="fas fa-brain"></i> Deep Learning</a></li>
+                        <li><a href="#"><i class="fas fa-comments"></i> NLP Solutions</a></li>
+                        <li><a href="#"><i class="fas fa-eye"></i> Computer Vision</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Data Analytics</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section newsletter-section">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for the latest AI insights and updates.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input" id="newsletterEmail" required>
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Sanipatel052@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 8953455851</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-user-tie"></i>
+                            <span>CEO: Akash Singh</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2024 Global AI. All rights reserved.</p>
+                        <div class="legal-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                    <div class="developer-credit">
+                        <span>Crafted with <i class="fas fa-heart"></i> by <a href="#">Akash Singh</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="newsletter.js"></script>
+    <script>
+        // Initialize EmailJS
+        emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+        
+        // Add logout functionality to blog page
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('currentUser');
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
